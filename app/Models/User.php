@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,4 +41,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['fullName'];
+
+    public function getFullNameAttribute(){
+        return "{$this->attributes['firstName']} {$this->attributes['lastName']}";
+    }
+
+    public function getFirstNameAttribute(){
+        return strtoupper(${$this->attributes['firstName']});
+    }
+
+    public function setFirstNameAttribute($value){
+          $this->attributes['firstName'] = strtoupper($value);
+    }
+
+    public function skills(){
+        return $this->belongsToMany('App\Models\Skill', 'users_skills');
+    }
 }
