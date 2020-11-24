@@ -20,7 +20,7 @@ use \App\Http\Controllers\API\UsersSkillsController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/users', [UsersController::class, 'index']);
-Route::get('/users/{id}', [UsersController::class, 'show']);
-Route::get('/skills', [SkillsController::class, 'index']);
-Route::get('/users/{id}/skills', [UsersSkillsController::class, 'index']);
+Route::apiResource('/users', UsersController::class);
+Route::apiResource('/skills', SkillsController::class);
+
+Route::apiResource('/users/{id}/skills', UsersSkillsController::class);

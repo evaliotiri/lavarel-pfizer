@@ -42,11 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['fullName'];
+    protected $appends = ['fullName', 'upperCasedEmail'];
 
     public function getFullNameAttribute() {
         return "{$this->attributes['firstName']} {$this->attributes['lastName']}";
     }
+
+    public function getUpperCasedEmailAttribute(){
+        return strtoupper($this->attributes['email']);
+    }
+
 
     public function skills() {
         return $this->belongsToMany(Skill::class, 'users_skills');
