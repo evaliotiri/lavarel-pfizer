@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Skill;
 use Illuminate\Database\Seeder;
 
 class SkillsSeeder extends Seeder
@@ -13,9 +15,14 @@ class SkillsSeeder extends Seeder
      */
     public function run()
     {
-        Skill::factory()
-            ->times(50)
-            ->hasRoles(1)
-            ->create();
+        $skills = Skill::factory()->times(10)->create();
+
+        $users = User::all();
+
+        $users->each(function($user) use ($skills) {
+            $ids = $skills->random(5)->pluck('id');
+
+            $user->skills()->sync($ids);
+        });
     }
 }

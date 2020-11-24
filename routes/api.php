@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\UsersController;
-use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\API\UsersController;
+use \App\Http\Controllers\API\SkillsController;
+use \App\Http\Controllers\API\UsersSkillsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::apiResource('/users', UsersController::class);
+Route::apiResource('/skills', SkillsController::class);
 
-
-Route::get('/hello', function(){
-    return 'Hello there!';
-});
-
-
-Route::get('/users', function(){
-     return 'Users';
-});
-
-Route::get('/users/{id}/skills', [UsersSkillsController::class, 'index']);
-
-
-
+Route::apiResource('/users/{id}/skills', UsersSkillsController::class);

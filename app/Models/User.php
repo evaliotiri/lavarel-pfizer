@@ -11,14 +11,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
         'password',
     ];
@@ -42,21 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['fullName'];
+    protected $appends = ['fullName', 'upperCasedEmail'];
 
-    public function getFullNameAttribute(){
+    public function getFullNameAttribute() {
         return "{$this->attributes['firstName']} {$this->attributes['lastName']}";
     }
 
-    public function getFirstNameAttribute(){
-        return strtoupper(${$this->attributes['firstName']});
+    public function getUpperCasedEmailAttribute(){
+        return strtoupper($this->attributes['email']);
     }
 
-    public function setFirstNameAttribute($value){
-          $this->attributes['firstName'] = strtoupper($value);
-    }
 
-    public function skills(){
-        return $this->belongsToMany('App\Models\Skill', 'users_skills');
+    public function skills() {
+        return $this->belongsToMany(Skill::class, 'users_skills');
     }
 }
