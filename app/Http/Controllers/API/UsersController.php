@@ -4,24 +4,33 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    /**
+     * Get a list of users
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index() {
-        $users = User::all();
+        $users = UserResource::collection(User::all());
         $count = count($users);
 
-        return compact('users', 'count');
+        return response()->json(compact('users', 'count'));
     }
 
+    /**
+     * Get a single user
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(User $user) {
+        $user = new UserResource($user);
 
-    public function show($id){
-
-        $current = User::findOrFail($id);
-        return compact('current');
+        return response()->json(compact('user'));
     }
 
     public function store(Request $request){
@@ -36,14 +45,31 @@ class UsersController extends Controller
         return response() -> json(compact('user'),201);
     }
 
-    public function update(Request $request, User $user){
+    /**
+     * Update a specific user
+     *
+     * @param UpdateRequest $request
+     * @param User    $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateRequest $request, User $user) {
         $user->update($request->only('firstName', 'lastName', 'email'));
-         // update the password via encrypted way
-        return response()->json('User is updated'. $user ,200);
+
+        return response()->json(null, 204);
     }
 
-    public function destroy(User $user){
+    /**
+     * Delete a specific user
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(User $user) {
         $user->delete();
-        return response()->json('The user is deleted '. $user, 200);
+
+        return response()->json(null, 204);
     }
 }
