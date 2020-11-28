@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,13 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->times(10)->create();
+        User::factory()->times(20)->create();
+
+        $department=Department::find(1);
+        $user=User::find(1);
+
+        $department->manager()->save($user);
+
+
     }
 }
