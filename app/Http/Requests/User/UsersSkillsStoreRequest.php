@@ -4,12 +4,13 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class UsersSkillsStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
+     *
      */
     public function authorize()
     {
@@ -24,9 +25,20 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => 'required|email',
+            'skills' => 'required|array',
+            'skills.*' => 'integer|exists:skills,id'
+        ];
+    }
+
+    /**
+     * Get custom messages based on the validation rule.
+     *
+     * @return array
+     */
+    public function messages(){
+
+        return [
+            'skills.required' => 'Pass an array with skills id!',
         ];
     }
 }
