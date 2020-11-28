@@ -19,21 +19,3 @@ use App\Http\Controllers\UsersController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-Route::get('/users', [UsersController::class, 'index']);
-
-Route::get('/about', function(){
-    return view('about');
-});
-
-Route::get('/users/{id}', function($id){
-    return  "User id : {$id}";
-});
-
-
-Route::post('/users/{id}', function(Request $request, $id){
-    $data = $request->only('email');
-    
-    return response()->json($data, 202);
-});
