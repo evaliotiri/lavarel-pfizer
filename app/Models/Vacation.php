@@ -5,23 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Skill extends Model
+class Vacation extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
-
+    protected $fillable = ['to', 'from'];
 
     /**
      * Represents the one-to-many relationship between the User and Vacation tables by
      * exposing this function.
      *
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function users() {
-        return $this->belongsToMany(User::class, 'users_skills');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 }
