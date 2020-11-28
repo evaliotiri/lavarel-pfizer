@@ -81,3 +81,17 @@ $ vagrant up
 When this is done we will be able to open our application in the browser by visiting `homestead.test`
 
 ![Laravel Homepage](./laravel-homepage.png)
+
+## About the app
+
+As a user of this app, you will be able to:
+
+  * add vacations
+  * be assigned to your department
+  * create new department
+  * bind departments with other users
+  * define each department's manager
+  
+  First and foremost, all the aforementioned actions are validated before their execution.
+
+   
