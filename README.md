@@ -69,43 +69,16 @@ When this is done we will be able to open our application in the browser by visi
 
 ![Laravel Homepage](./laravel-homepage.png)
 
-## Useful commands when using Homestead for development
+## About the app
 
-You can check the running VMs with:
+As a user of this app, you will be able to:
 
-```
-$ vagrant global-status
-```
+  * add vacations
+  * be assigned to your department
+  * create new department
+  * bind departments with other users
+  * define each department's manager
+  
+  First and foremost, all the aforementioned actions are validated before their execution.
 
-You can destroy a VM with:
-
-```
-$ vagrant destory ID
-```
-
-You can reload a VM whenever needed through:
-
-```
-$ vagrant reload --provision
-```
-
-You can ssh into a VM with:
-
-```
-$ vagrant ssh
-$ cd code
-```
-
-You can run tests by using `phpunit`. First ssh into the VM as shown above and then run:
-
-```
-$ phpunit
-```
-
-You can install new packages through `composer`. First ssh into the VM as shown above and then run:
-
-```
-$ composer require PACKAGE_NAME
-```
-
-You can find more details about Vagrant commands in the official [docs](https://www.vagrantup.com/docs/cli).
+   
