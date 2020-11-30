@@ -13,16 +13,16 @@ use Illuminate\Http\JsonResponse;
 class SkillsController extends Controller
 {
 
-
     /**
      * Display all the stored skills
      *
-     * @return array skills
+     * @return JsonResponse skills
      */
     public function index() {
+
         $skills = Skill::all();
 
-        return compact('skills');
+        return  response()->json(compact('skills'));
     }
 
     /**
