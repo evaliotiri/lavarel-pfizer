@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -72,7 +73,6 @@ class User extends Authenticatable{
         return strtoupper($this->attributes['email']);
     }
 
-
     /**
      * Represents the many-to-many relationship between the User and Skill tables by
      * exposing this function.
@@ -95,10 +95,11 @@ class User extends Authenticatable{
 
     /**
      * Represents the one-to-one relationship between the Department and User tables by exposing this function.
-     * @return BelongsTo
+     *
+     * @return HasOne
      */
     public function department(){
-      return $this->belongsTo('App\Models\Department');
+      return $this->hasOne('App\Models\Department');
     }
 
 }
