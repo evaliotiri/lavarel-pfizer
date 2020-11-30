@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\User\UsersSkillsUpdateRequest;
 use App\Http\Requests\User\UsersSkillsStoreRequest;
+use App\Http\Resources\SkillResource;
 use App\Models\Skill;
 use App\Models\User;
 use Exception;
@@ -21,7 +22,11 @@ class UsersSkillsController extends Controller
      * @return JsonResponse response
      */
     public function index(User $user){
-        $skills = $user->skills;
+          print_r($user->skills);
+          die();
+
+        $skills = SkillResource::collection($user->skills);
+
 
         return response()->json(['skills' => $skills]);
     }
