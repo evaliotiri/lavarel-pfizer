@@ -9,7 +9,7 @@ Built with:
 - Laravel 8
 
 
-## About the app
+## Description
 
 As a user of this app, you will be able to:
 
