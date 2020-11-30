@@ -18,9 +18,10 @@ class UsersSeeder extends Seeder
         User::factory()->times(20)->create();
 
         $department=Department::find(1);
-        $user=User::find(1);
+        $manager=User::find(1);
 
-        $department->manager()->save($user);
+       $department->manager()->associate($manager);
+       $department->save();
 
 
     }
