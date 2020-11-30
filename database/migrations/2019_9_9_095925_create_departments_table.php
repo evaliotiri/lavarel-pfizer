@@ -18,6 +18,7 @@ class CreateDepartmentsTable extends Migration
             $table->timestamps();
             $table->string('title');
 
+            $table->unsignedBigInteger('manager_id')->nullable();
         });
     }
 
