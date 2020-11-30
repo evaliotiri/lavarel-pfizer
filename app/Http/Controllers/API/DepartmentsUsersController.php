@@ -4,11 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Department\DepartmentsUsersStoreRequest;
-use App\Http\Requests\User\Department\DepartmentsUsersUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Department;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 class DepartmentsUsersController extends Controller
@@ -20,6 +18,7 @@ class DepartmentsUsersController extends Controller
      * @return JsonResponse departments
      */
     public function index(Department $department){
+
         return response()->json($department->users()->get(),200);
     }
 
@@ -44,37 +43,25 @@ class DepartmentsUsersController extends Controller
      * @param User $user
      * @return UserResource details of the user account
      */
-    public function show(Department $department, User $user){
+    public function update(Department $department, User $manager) {
+        $department->manager()->associate($manager);
+        $department->save();
 
-        return new UserResource($user);
+        return response()->json("The manager is set to the department!", 204);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Disassociate a department from a user
      *
      * @param Department $department
-     * @param User $user
-     * @param DepartmentsUsersUpdateRequest $request
-     * @return JsonResponse response
-     */
-    public function update(Department $department, User $user, DepartmentsUsersUpdateRequest $request){
-        $department->users()->update($request->only('firstName', 'lastName', 'email', 'password'));
-
-        return response()->json('The user is updated!', 200);
-    }
-
-    /**
-     * Remove the specified user from the department.
+     * @param User       $user
      *
-     * @param User $user
-     * @return JsonResponse response
-     * @throws Exception exception in case of the user or the department do not exist
+     * @return JsonResponse
      */
-    public function destroy(User $user){
+    public function destroy(Department $department, User $user) {
+        $department->manager()->disassociate();
+        $department->save();
 
-        $user->delete();
-
-        return response()->json('The user is deleted!', 200);
-
+        return response()->json('There is no manager for this department!', 204);
     }
 }
