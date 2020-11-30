@@ -76,27 +76,4 @@ class DepartmentsController extends Controller
         return response()->json('The department deleted!', 208);
     }
 
-    /**
-     * Assigns the manager to a specified department. If the manager is previously assigned,
-     * the user is informed.
-     *
-     * Improvement: Before the manager assignment, it could be safer to search if the current user is already assigned
-     * as manager to another department. By doing this, the one-to-one relationship between
-     * the user and department and its constraint will be maintained.
-     *
-     * @param Department $department department
-     * @param User $user user
-     * @return JsonResponse response
-     */
-    public function assignManager(Department $department, User $user){
-
-        if ($department->manager()->exists()) {
-            return response() -> json('This department has a manager!', 205);
-        }else{
-            $department->manager()->save($user);
-
-            return response()->json('The manager is set!', 200);
-        }
-    }
-
 }
