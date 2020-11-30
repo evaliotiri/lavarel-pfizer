@@ -13,7 +13,7 @@ class DepartmentResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    public function toArray(Request $request){
+    public function toArray($request){
         return [
             'title' => $this->title,
         ];
