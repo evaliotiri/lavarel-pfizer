@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SkillResource extends JsonResource
@@ -10,11 +9,14 @@ class SkillResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray(Request $request)
+    public function toArray($request)
     {
-
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+        ];
     }
 }
