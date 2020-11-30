@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -25,9 +26,9 @@ class Department extends Model
 
     /**
      * Represents the one-to-one relationship between the Department and User tables by exposing this function.
-     * @return HasOne
+     * @return BelongsTo
      */
     public function manager(){
-       return $this->hasOne('App\Models\User');
+       return $this->belongsTo('App\Models\User');
     }
 }
