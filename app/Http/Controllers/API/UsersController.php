@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 class UsersController extends Controller
 {
     /**
-     * Diplay the users
+     * Display the users
      *
      * @return JsonResponse response
      */
